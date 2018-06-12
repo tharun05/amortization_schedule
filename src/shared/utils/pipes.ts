@@ -1,5 +1,4 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {Util} from "./util"
 
 
 @Pipe({
@@ -93,18 +92,6 @@ export class DecodeURIPipe implements PipeTransform {
             value =decodeURIComponent(value.replace(/\+/g,  " "));
         }
         return value;
-    }
-}
-@Pipe({ name: 'date' })
-export class DatePipe implements PipeTransform {
-    transform(value : any, args : any) {
-        return Util.DateFormate(value);
-    }
-}
-@Pipe({ name: 'datetime' })
-export class DateTimePipe implements PipeTransform {
-    transform(value : any, args : any) {
-        return Util.DateTimeFormate(value);
     }
 }
 @Pipe({ name: 'flag' })

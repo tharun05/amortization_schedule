@@ -1,0 +1,120 @@
+<aside>
+  <article>
+          <mat-toolbar style="padding:0px">
+                  <h5 style="text-align: center;">My Loan Calculator</h5><br>
+                  <!-- <p>Get the Home Loan Repayment Amortization Schedule monthwise for free. Find out your monthly EMI, Interest, Prinical and the monthly loan amount outstanding balance. You can just find all these details in our Home loan amortization schedule.
+                  </p> -->
+          </mat-toolbar>
+  </article>
+  <main class="padding">
+
+      <form novalidate autocomplete='off'>
+          <div fxLayout="row wrap" fxLayoutAlign="start start" >
+              <!--class="row center-xs parent-container padding"-->
+              <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="48" fxFlex.md="48" fxFlex.lg="48" fxFlex.xl="48" class="padding" style="margin:10px">
+                  <mat-card style="height: 282px">
+                      <mat-card-content>
+                          <div fxLayout="row wrap" fxLayoutAlign="start start">
+                              <h3 fxFlex="100" style="text-align: left;">Loan Details</h3>
+                              <div fxLayout="row wrap" fxFlex="100">
+                                  <mat-form-field fxFlex="100">
+                                      <input matInput placeholder="
+                                      Loan Amount" required [(ngModel)]="loanData.amt" [ngModelOptions]="{standalone: true}">
+                                  </mat-form-field>
+                                  <mat-form-field fxFlex="100" class="padding">
+                                      <input matInput placeholder="Annual Interest Rate:" required [(ngModel)]="loanData.annualInterestRate" [ngModelOptions]="{standalone: true}">   
+                                  </mat-form-field>
+                                  <mat-form-field fxFlex="100" class="padding margin8">
+                                    <input matInput type="text" placeholder="Total Number of EMI Payments (in Months)" required [(ngModel)]="loanData.months" [ngModelOptions]="{standalone: true}">                   
+                                  </mat-form-field> 
+                                  <button mat-raised-button color="warn" fxLayoutAlign="center center" class="link" (click)="calculate()">
+                                   calculate
+                                </button> 
+                                <button mat-raised-button color="basic" fxLayoutAlign="center center" class="link" (click)="reset()">
+                                  Reset
+                               </button>  
+                              </div>
+                          </div>
+
+                      </mat-card-content>
+                  </mat-card>
+              </div>
+              <div fxFlex="50" fxFlex.xs="100" fxFlex.sm="48" fxFlex.md="48" fxFlex.lg="48" fxFlex.xl="48" class=" padding" style="margin:10px">
+                <mat-card  fxLayout="row" fxLayoutAlign="start start">
+                  <table align="center" class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <b>Loan Amount:</b>
+                            </td>
+                            <td align="right">{{displayLoan.loanAmt}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Number of EMIs:</b>
+                            </td>
+                            <td align="right">{{displayLoan.noOfEmi}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Annual Interest Rate:</b>
+                            </td>
+                            <td align="right">{{displayLoan.annualInterestRate}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Monthly Interest Rate:</b>
+                            </td>
+                            <td align="right">{{displayLoan.monthlyInterestRate  | number : '1.2-2'}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Monthly EMI Payment:</b>
+                            </td>
+                            <td align="right">Rs. {{displayLoan.monthlyEmiPayment  | number : '1.2-2'}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Total Loan Amount Payable:</b>
+                            </td>
+                            <td align="right">Rs. {{displayLoan.totalAmt  | number : '1.2-2'}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Total Interest Payable:</b>
+                            </td>
+                            <td align="right">Rs. {{displayLoan.interestAmt  | number : '1.2-2'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </mat-card>
+            </div>
+            <div fxFlex="100" fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" fxFlex.lg="100" fxFlex.xl="108" class=" padding" style="margin:10px" *ngIf="monthlyEmis.length>0">
+                <mat-card  fxLayout="row" fxLayoutAlign="start start">
+                        <table>
+                                <thead>
+                                    <tr class="table">
+                                        <th scope="col">NO</th>
+                                        <th scope="col">EMI</th>
+                                        <th scope="col">Interest</th>
+                                        <th scope="col">Principal</th>
+                                        <th scope="col">Balance</th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of monthlyEmis" style="cursor:pointer"  class="table" >
+                                        <td >{{item.period}}</td>
+                                        <td >{{item.monthEmi  | number : '1.2-2'}}</td>
+                                        <td >{{item.interestAmt  | number : '1.2-2' }}</td>
+                                        <td >{{item.pricipleAmt  | number : '1.2-2' }}</td>
+                                        <td >{{item.balanceAmt  | number : '1.2-2'}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                </mat-card>
+            </div>    
+          </div>
+      </form>
+  </main>
+</aside>
